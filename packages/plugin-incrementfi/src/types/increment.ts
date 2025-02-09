@@ -41,3 +41,9 @@ export interface PoolActionResult {
     errorMessage?: string;
     pairAddress?: string;
 }
+
+export interface SwapResult extends PoolActionResult {
+    amountIn?: number;
+    amountOut?: number;
+    path?: string[];
+}

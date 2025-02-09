@@ -7,7 +7,7 @@ import { basicFlowPlugin } from "@fixes-ai/common";
 import { incrementfiPlugin } from "@fixes-ai/plugin-incrementfi";
 
 const localDefaultCharacter: Character = {
-    modelProvider: ModelProviderName.DEEPSEEK,
+    modelProvider: ModelProviderName.ANTHROPIC,
     plugins: [basicFlowPlugin, incrementfiPlugin,],
 } as Character;
 

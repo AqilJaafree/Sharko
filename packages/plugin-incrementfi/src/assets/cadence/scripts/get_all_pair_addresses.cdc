@@ -1,6 +1,6 @@
 import SwapFactory from 0x6ca93d49c45a249f
 
-pub fun main(): [Address] {
+access(all) fun main(): [Address] {
   let len = SwapFactory.getAllPairsLength()
   if (len == 0) {
     return []

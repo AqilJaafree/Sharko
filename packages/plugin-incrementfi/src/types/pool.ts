@@ -38,3 +38,19 @@ export interface PairStats {
     tvlInFlow: number;
     apr: number;
 }
+
+export interface CreatePoolParams {
+    token0Name: string;
+    token0Address: string;
+    token1Name: string;
+    token1Address: string;
+    stableMode: boolean;
+}
+
+export interface SwapParams {
+    exactAmountIn: number;
+    amountOutMin: number;
+    tokenKeyPath: string[];
+    to: string;
+    deadline?: number;
+}

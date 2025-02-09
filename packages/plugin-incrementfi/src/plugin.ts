@@ -4,6 +4,8 @@ import {
     AddLiquidityAction,
     RemoveLiquidityAction,
     GetPoolInfoAction,
+    CreatePoolAction,
+    SwapFlowTokenAction
 } from "./actions";
 import { IncrementService } from "./services/increment.service";
 
@@ -18,6 +20,8 @@ export const incrementfiPlugin: PluginOptions = {
         AddLiquidityAction,
         RemoveLiquidityAction,
         GetPoolInfoAction,
+        SwapFlowTokenAction,
+        CreatePoolAction
     ],
     providers: [],
     evaluators: [],
