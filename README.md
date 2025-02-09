@@ -1,66 +1,90 @@
-# Eliza 🤖 on Flow Blockchain
+# Sharko powered by Eliza and Flow
 
-Flow-dedicated Autonomous Agents powered by [Eliza](https://github.com/elizaOs/eliza).
-
-<div align="center">
-  <img src="./docs/static/img/elizaOnFlow_banner.png" alt="ElizaOnFlow Banner" width="100%" />
-</div>
+Able to swap, create the pool, add, remove and etc by utilize new plugin (plugin-incrementfi) also made by Sharko team
 
 ## ✨ Features & Use Cases
 
-> Basic Features
+> Features
 
-Check out the [Eliza's README](https://github.com/elizaOS/eliza/tree/main?tab=readme-ov-file#-features)
+- create the flow account
+- swap between Flow and USDC testnet
+- open the pool based on incrementfi
+- Add the liquidity based on pair of Flow and USDC
+- Utilize the model to reduce the impermenant lose
 
-> Extra Features
-
-- Provide Flow-dedicated Agent without other extra blockchain dependencies runtime(by default).
-  - You can still use other blockchains if you want.
-- Use [InversifyJS](https://github.com/inversify/InversifyJS) for dependency injection.
-  - Share the same instances of providers across the application and plugins.
-  - All actions / evaluators / providers for plugins can be dynamically loaded and injected.
-  - Provide standard action / evaluator wrapper for plugins.
-  - Let develoeprs focus on the business logic of actions / evaluators.
-- Use shared `flow.json` for all Flow Cadence contracts dependencies in Flow relevant plugins.
-- Provide accounts management for AI Agents based on Flow’s unique Account Linking feature.
-  - Fully on-chain child accounts management without any extra off-chain private key custodial service.
-  - Each user account in Eliza system can be allocated with a full functional Flow wallet fully controlled by the AI Agent as its child account.
-  - You can customize any transaction for your users based on the on-chain child accounts management system.
-- Both Flow EVM and Flow Cadence projects will be supported.
-- Fully compatible with origin Eliza plugins.
-
-## 🚀 Quick Start
-
-Please follow the [Quick Start Guide](./docs/guides/quickstart.md) to create your first Agent on Flow.
-
-## 🌊 Flow Cadence
-
-### Core Cadence Contracts
-
-- [AccountsPool](./cadence/contracts/AccountsPool.cdc) - A contract to let the agent account manage multiple child accounts.
-
-| Contract | Testnet Address | Mainnet Address |
-| --- | --- | --- |
-| AccountsPool | [0x9f9cd022231f7a19](https://testnet.flowscan.io/contract/A.9f9cd022231f7a19.AccountsPool) | [0xa253e78e8971f273](https://www.flowscan.io/contract/A.a253e78e8971f273.AccountsPool) |
-
-### Install / Add new Flow Cadence contracts dependencies
-
-All Flow Cadence contracts dependencies should be installed to `flow.json` file.
-To ensure development and deployment, you need to install all dependencies.
-
+### Development
 ```bash
-flow deps install
+# Install dependencies
+pnpm install --no-frozen-lockfile
+
+# Build the plugin
+pnpm run build
+
+# Run agent in debug mode
+pnpm start:debug --character="characters/dobby.character.json"
+
+# Start the client
+pnpm start:client
 ```
 
-And if you want to add a new contract dependency, you can use the following command:
+## Contract Addresses (Testnet) By IncrementFi
 
+- FLOW Token: 0x7e60df042a9c0868
+- USDC: 0x64adf39cbc354fcb
+- SwapFactory: 0x6ca93d49c45a249f
+- SwapRouter: 0xa6850776a94e6551
+
+## Usage
+
+### Creating a Pool
 ```bash
-flow deps add mainnet://0xAddress.ContractName
+const result = await incrementService.createPool({
+    token0Name: "FlowToken",
+    token0Address: "0x7e60df042a9c0868",
+    token1Name: "USDCFlow",
+    token1Address: "0x64adf39cbc354fcb",
+    stableMode: false
+});
 ```
 
-### Community & contact
+### Swapping Tokens
+```bash
+const result = await incrementService.swapExactTokens({
+    exactAmountIn: 10.0,
+    amountOutMin: 9.5,  // 5% slippage
+    tokenKeyPath: [
+        "A.7e60df042a9c0868.FlowToken",
+        "A.64adf39cbc354fcb.USDCFlow"
+    ],
+    to: recipientAddress,
+    deadline: Math.floor(Date.now()/1000) + 3600 // 1 hour
+});
+```
 
-- [GitHub Issues](https://github.com/fixes-world/elizaOnFlow/issues). Best for: bugs you encounter using ElizaOnFlow, and feature proposals.
-- [Fixes Telegram](https://t.me/fixes_world). Best for: sharing your applications and hanging out with the Fixes community.
-- [Eliza Discord](https://discord.gg/ai16z)
-- [Flow Discord](https://discord.gg/flow)
+### Adding Liquidity
+```bash
+const result = await incrementService.addLiquidity({
+    token0Key: "A.7e60df042a9c0868.FlowToken",
+    token1Key: "A.64adf39cbc354fcb.USDCFlow",
+    token0Amount: 100.0,
+    token1Amount: 100.0,
+    token0Min: 99.0,
+    token1Min: 99.0,
+    deadline: Math.floor(Date.now()/1000) + 3600,
+    stableMode: false
+});
+```
+
+### Removing Liquidity
+```bash
+const result = await incrementService.removeLiquidity({
+    token0Key: "A.7e60df042a9c0868.FlowToken",
+    token1Key: "A.64adf39cbc354fcb.USDCFlow",
+    lpTokenAmount: 50.0,
+    token0OutMin: 48.0,
+    token1OutMin: 48.0,
+    deadline: Math.floor(Date.now()/1000) + 3600,
+    stableMode: false
+});
+```
+
