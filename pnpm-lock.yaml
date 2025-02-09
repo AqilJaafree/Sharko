@@ -504,6 +504,9 @@ importers:
       '@fixes-ai/core':
         specifier: workspace:*
         version: link:../packages/core
+      '@fixes-ai/plugin-incrementfi':
+        specifier: workspace:*
+        version: link:../packages/plugin-incrementfi
       readline:
         specifier: 1.3.0
         version: 1.3.0
@@ -5115,6 +5118,46 @@ importers:
       dotenv:
         specifier: 16.4.5
         version: 16.4.5
+      tsup:
+        specifier: 8.3.5
+        version: 8.3.5(@swc/core@1.10.4(@swc/helpers@0.5.15))(jiti@2.4.2)(postcss@8.4.49)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.7.0)
+      vitest:
+        specifier: 2.1.4
+        version: 2.1.4(@types/node@22.12.0)(jsdom@25.0.1(bufferutil@4.0.9)(canvas@2.11.2(encoding@0.1.13))(utf-8-validate@6.0.5))(terser@5.37.0)
+
+  packages/plugin-incrementfi:
+    dependencies:
+      '@elizaos/core':
+        specifier: workspace:*
+        version: link:../../deps/eliza/packages/core
+      '@elizaos/plugin-di':
+        specifier: workspace:*
+        version: link:../../deps/eliza/packages/plugin-di
+      '@elizaos/plugin-flow':
+        specifier: workspace:*
+        version: link:../../deps/eliza/packages/plugin-flow
+      '@fixes-ai/common':
+        specifier: workspace:*
+        version: link:../common
+      '@fixes-ai/core':
+        specifier: workspace:*
+        version: link:../core
+      inversify:
+        specifier: 6.2.1
+        version: 6.2.1(reflect-metadata@0.2.2)
+      reflect-metadata:
+        specifier: 0.2.2
+        version: 0.2.2
+      uuid:
+        specifier: 11.0.3
+        version: 11.0.3
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@biomejs/biome':
+        specifier: 1.9.4
+        version: 1.9.4
       tsup:
         specifier: 8.3.5
         version: 8.3.5(@swc/core@1.10.4(@swc/helpers@0.5.15))(jiti@2.4.2)(postcss@8.4.49)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.7.0)
@@ -13943,6 +13986,7 @@ packages:
   '@xmtp/agent-starter@0.0.6':
     resolution: {integrity: sha512-QHC1wWnTGX8YDMjrnB/EJT9RZk3GquVYiHCW8Jq9AKGpwxod0Gj6iiCxyKDS9MjCllZ19jlJnc6s0SSqTYCcIg==}
     engines: {node: '>=22'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@xmtp/content-type-group-updated@2.0.0':
     resolution: {integrity: sha512-gxYM4gM2IuKXpOwDcu6+RS7tkUMX6VStgdzFq8ruo3GVLZ03mwb9zjMNVhFwyRcdx6mNSDOTV01y+5P8aslkRg==}

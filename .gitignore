@@ -189,3 +189,6 @@ lit-config.json
 extra
 
 *.pkey
+
+test.pkey
+test-1.pkey
